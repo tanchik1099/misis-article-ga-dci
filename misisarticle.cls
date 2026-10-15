@@ -109,6 +109,7 @@
 \newcommand{\@classificationblock}{%
   {\fontsize{12}{14}\selectfont
     \raggedright
+    \cyrillicfont % ← используем кириллический шрифт для текста вроде «ГРНТИ»
     \ifx\@grnticodes\empty\else
       ГРНТИ~\@grnticodes\par
     \fi
