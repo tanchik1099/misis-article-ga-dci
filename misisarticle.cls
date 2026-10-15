@@ -66,18 +66,22 @@
 % Использовать TeX Gyre Termes с поддержкой кириллицы.
 % Times New Roman из mscorefonts-пакета Ubuntu не содержит кириллических глифов,
 % поэтому мы всегда используем TeX Gyre Termes (метрически совместим с TNR).
-\setmainfont{TeX Gyre Termes}[
+% DejaVu Serif гарантированно содержит кириллицу и есть в TeX Live на CI.
+% TeX Gyre Termes в текущем Docker-образе CI идёт без кириллических глифов.
+\setmainfont{DejaVu Serif}[
   Ligatures=TeX,
   Script=Cyrillic,
 ]
-\newfontfamily\cyrillicfont{TeX Gyre Termes}[
+\newfontfamily\cyrillicfont{DejaVu Serif}[
   Ligatures=TeX,
   Script=Cyrillic,
 ]
-\newfontfamily\cyrillicfontsf{TeX Gyre Heros}[
+\newfontfamily\cyrillicfontsf{DejaVu Sans}[
   Script=Cyrillic,
 ]
-\newfontfamily\cyrillicfonttt{TeX Gyre Cursor}[
+\newfontfamily\cyrillicfonttt{DejaVu Sans Mono}[
+  Script=Cyrillic,
+]
   Script=Cyrillic,
 ]
 \setlength{\parindent}{0.51cm}
