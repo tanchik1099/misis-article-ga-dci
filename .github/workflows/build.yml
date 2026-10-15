@@ -6,11 +6,22 @@ jobs:
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
+
+      - name: Install fonts (Times New Roman + Cyrillic)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fontconfig
+          echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
+          sudo apt-get install -y ttf-mscorefonts-installer
+          sudo fc-cache -f -v
+          fc-list | grep -i "times" || echo "Times New Roman не найден"
+
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
           root_file: article.tex
           compiler: xelatex
+
       - name: Upload PDF
         uses: actions/upload-artifact@v4
         with:
