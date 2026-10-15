@@ -63,32 +63,23 @@
   pdfborder={0 0 0}
 }
 
-\IfFontExistsTF{Times New Roman}{%
-  \setmainfont{Times New Roman}[
-    Ligatures=TeX,
-    BoldFont={Times New Roman Bold},
-    ItalicFont={Times New Roman Italic},
-    BoldItalicFont={Times New Roman Bold Italic},
-  ]%
-  \newfontfamily\cyrillicfont{Times New Roman}[
-    Ligatures=TeX,
-    BoldFont={Times New Roman Bold},
-    ItalicFont={Times New Roman Italic},
-    BoldItalicFont={Times New Roman Bold Italic},
-  ]%
-  \newfontfamily\cyrillicfontsf{Times New Roman}[
-    BoldFont={Times New Roman Bold},
-    ItalicFont={Times New Roman Italic},
-    BoldItalicFont={Times New Roman Bold Italic},
-  ]%
-  \newfontfamily\cyrillicfonttt{Courier New}%
-}{%
-  \setmainfont{TeX Gyre Termes}[Ligatures=TeX]%
-  \newfontfamily\cyrillicfont{TeX Gyre Termes}[Ligatures=TeX]%
-  \newfontfamily\cyrillicfontsf{TeX Gyre Termes}%
-  \newfontfamily\cyrillicfonttt{TeX Gyre Cursor}%
-}
-
+% Использовать TeX Gyre Termes с поддержкой кириллицы.
+% Times New Roman из mscorefonts-пакета Ubuntu не содержит кириллических глифов,
+% поэтому мы всегда используем TeX Gyre Termes (метрически совместим с TNR).
+\setmainfont{TeX Gyre Termes}[
+  Ligatures=TeX,
+  Script=Cyrillic,
+]
+\newfontfamily\cyrillicfont{TeX Gyre Termes}[
+  Ligatures=TeX,
+  Script=Cyrillic,
+]
+\newfontfamily\cyrillicfontsf{TeX Gyre Heros}[
+  Script=Cyrillic,
+]
+\newfontfamily\cyrillicfonttt{TeX Gyre Cursor}[
+  Script=Cyrillic,
+]
 \setlength{\parindent}{0.51cm}
 \setlength{\parskip}{0pt plus 1pt minus 1pt}
 \setstretch{1.0}
