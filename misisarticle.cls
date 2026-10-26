@@ -63,31 +63,10 @@
   pdfborder={0 0 0}
 }
 
-\IfFontExistsTF{Times New Roman}{%
-  \setmainfont{Times New Roman}[
-    Ligatures=TeX,
-    BoldFont={Times New Roman Bold},
-    ItalicFont={Times New Roman Italic},
-    BoldItalicFont={Times New Roman Bold Italic},
-  ]%
-  \newfontfamily\cyrillicfont{Times New Roman}[
-    Ligatures=TeX,
-    BoldFont={Times New Roman Bold},
-    ItalicFont={Times New Roman Italic},
-    BoldItalicFont={Times New Roman Bold Italic},
-  ]%
-  \newfontfamily\cyrillicfontsf{Times New Roman}[
-    BoldFont={Times New Roman Bold},
-    ItalicFont={Times New Roman Italic},
-    BoldItalicFont={Times New Roman Bold Italic},
-  ]%
-  \newfontfamily\cyrillicfonttt{Courier New}%
-}{%
-  \setmainfont{TeX Gyre Termes}[Ligatures=TeX]%
-  \newfontfamily\cyrillicfont{TeX Gyre Termes}[Ligatures=TeX]%
-  \newfontfamily\cyrillicfontsf{TeX Gyre Termes}%
-  \newfontfamily\cyrillicfonttt{TeX Gyre Cursor}%
-}
+\setmainfont{Liberation Serif}[Ligatures=TeX, Script=Cyrillic]
+\newfontfamily\cyrillicfont{Liberation Serif}[Ligatures=TeX, Script=Cyrillic]
+\newfontfamily\cyrillicfontsf{Liberation Sans}[Script=Cyrillic]
+\newfontfamily\cyrillicfonttt{Liberation Mono}[Script=Cyrillic]
 
 \setlength{\parindent}{0.51cm}
 \setlength{\parskip}{0pt plus 1pt minus 1pt}
