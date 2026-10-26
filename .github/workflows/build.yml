@@ -7,14 +7,14 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v4
 
-      - name: Compile LaTeX (explicit 3 passes)
-        uses: xu-cheng/texlive-action/full@v2
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
         with:
-          run: |
-            apk add font-liberation
-            xelatex -interaction=nonstopmode article.tex
-            xelatex -interaction=nonstopmode article.tex
-            xelatex -interaction=nonstopmode article.tex
+          root_file: article.tex
+          compiler: xelatex
+          args: "-interaction=nonstopmode -halt-on-error"
+          # Для Alpine (в котором работает latex-action) пакет называется font-liberation
+          extra_system_packages: "font-liberation"
 
       - name: Upload PDF
         uses: actions/upload-artifact@v4
