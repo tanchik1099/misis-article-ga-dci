@@ -13,8 +13,8 @@ jobs:
           root_file: article.tex
           compiler: xelatex
           args: "-interaction=nonstopmode -halt-on-error"
-          # Встроенная установка системных шрифтов (экшен сам выберет apt или apk)
-          extra_system_packages: "fonts-liberation"
+          # Пакет для Alpine Linux, который ставит шрифты Times New Roman (Liberation)
+          extra_system_packages: "font-liberation"
 
       - name: Upload PDF
         uses: actions/upload-artifact@v4
