@@ -7,18 +7,9 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v4
 
-      - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: article.tex
-          compiler: xelatex
-          args: "-interaction=nonstopmode -halt-on-error"
-          extra_system_packages: "font-liberation"
-
-      # Добавляем шаг для дополнительной компиляции (на случай если latexmk пропустит)
-      - name: Recompile for references
+      - name: Compile LaTeX (explicit 2 passes)
         run: |
-          docker run --rm -v $PWD:/workdir -w /workdir ghcr.io/xu-cheng/texlive-full:latest xelatex -interaction=nonstopmode article.tex
+          docker run --rm -v ${{ github.workspace }}:/workdir -w /workdir ghcr.io/xu-cheng/texlive-full:latest sh -c "apk add font-liberation && xelatex -interaction=nonstopmode article.tex && xelatex -interaction=nonstopmode article.tex"
 
       - name: Upload PDF
         uses: actions/upload-artifact@v4

@@ -63,22 +63,32 @@
   pdfborder={0 0 0}
 }
 
-% DejaVu Serif гарантированно содержит кириллицу и есть в TeX Live на CI.
-% TeX Gyre Termes в текущем Docker-образе CI идёт без кириллических глифов.
-\setmainfont{DejaVu Serif}[
-  Ligatures=TeX,
-  Script=Cyrillic,
-]
-\newfontfamily\cyrillicfont{DejaVu Serif}[
-  Ligatures=TeX,
-  Script=Cyrillic,
-]
-\newfontfamily\cyrillicfontsf{DejaVu Sans}[
-  Script=Cyrillic,
-]
-\newfontfamily\cyrillicfonttt{DejaVu Sans Mono}[
-  Script=Cyrillic,
-]
+\IfFontExistsTF{Times New Roman}{%
+  \setmainfont{Times New Roman}[
+    Ligatures=TeX,
+    BoldFont={Times New Roman Bold},
+    ItalicFont={Times New Roman Italic},
+    BoldItalicFont={Times New Roman Bold Italic},
+  ]%
+  \newfontfamily\cyrillicfont{Times New Roman}[
+    Ligatures=TeX,
+    BoldFont={Times New Roman Bold},
+    ItalicFont={Times New Roman Italic},
+    BoldItalicFont={Times New Roman Bold Italic},
+  ]%
+  \newfontfamily\cyrillicfontsf{Times New Roman}[
+    BoldFont={Times New Roman Bold},
+    ItalicFont={Times New Roman Italic},
+    BoldItalicFont={Times New Roman Bold Italic},
+  ]%
+  \newfontfamily\cyrillicfonttt{Courier New}%
+}{%
+  \setmainfont{TeX Gyre Termes}[Ligatures=TeX]%
+  \newfontfamily\cyrillicfont{TeX Gyre Termes}[Ligatures=TeX]%
+  \newfontfamily\cyrillicfontsf{TeX Gyre Termes}%
+  \newfontfamily\cyrillicfonttt{TeX Gyre Cursor}%
+}
+
 \setlength{\parindent}{0.51cm}
 \setlength{\parskip}{0pt plus 1pt minus 1pt}
 \setstretch{1.0}
@@ -107,10 +117,8 @@
 \newcommand{\oecd}[1]{\gdef\@oecdcodes{#1}}
 
 \newcommand{\@classificationblock}{%
-  \ifnum\value{page}=1\relax
   {\fontsize{12}{14}\selectfont
     \raggedright
-    \fontspec{Liberation Serif}[Script=Cyrillic] % ← используем кириллический шрифт для текста вроде «ГРНТИ»
     \ifx\@grnticodes\empty\else
       ГРНТИ~\@grnticodes\par
     \fi
@@ -122,7 +130,6 @@
     \fi
     \vspace{0.3\baselineskip}%
   }%
-  \fi
 }
 
 \makeatletter
