@@ -110,7 +110,7 @@
   \ifnum\value{page}=1\relax
   {\fontsize{12}{14}\selectfont
     \raggedright
-    \cyrillicfont % ← используем кириллический шрифт для текста вроде «ГРНТИ»
+    \fontspec{Liberation Serif}[Script=Cyrillic] % ← используем кириллический шрифт для текста вроде «ГРНТИ»
     \ifx\@grnticodes\empty\else
       ГРНТИ~\@grnticodes\par
     \fi
