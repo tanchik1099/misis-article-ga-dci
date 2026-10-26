@@ -107,6 +107,7 @@
 \newcommand{\oecd}[1]{\gdef\@oecdcodes{#1}}
 
 \newcommand{\@classificationblock}{%
+  \ifnum\value{page}=1\relax
   {\fontsize{12}{14}\selectfont
     \raggedright
     \cyrillicfont % ← используем кириллический шрифт для текста вроде «ГРНТИ»
@@ -121,6 +122,7 @@
     \fi
     \vspace{0.3\baselineskip}%
   }%
+  \fi
 }
 
 \makeatletter
