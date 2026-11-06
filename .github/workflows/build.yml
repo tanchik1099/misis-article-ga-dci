@@ -1,0 +1,14 @@
+name: Build LaTeX document
+on: [push, workflow_dispatch]
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile LaTeX
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/workdir -w /workdir ghcr.io/xu-cheng/texlive-full:latest sh -c "apk add msttcorefonts-installer && update-ms-fonts && xelatex -interaction=nonstopmode article.tex && xelatex -interaction=nonstopmode article.tex"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PDF
+          path: article.pdf
