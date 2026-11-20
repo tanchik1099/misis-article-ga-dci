@@ -1,14 +1,39 @@
-name: Build LaTeX document
-on: [push, workflow_dispatch]
+name: Build and Release LaTeX PDF
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
 jobs:
-  build_latex:
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v4
-      - name: Compile LaTeX
-        run: |
-          docker run --rm -v ${{ github.workspace }}:/workdir -w /workdir ghcr.io/xu-cheng/texlive-full:latest sh -c "apk add msttcorefonts-installer && update-ms-fonts && xelatex -interaction=nonstopmode article.tex && xelatex -interaction=nonstopmode article.tex"
-      - uses: actions/upload-artifact@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX (XeLaTeX)
+        uses: xu-cheng/latex-action@v3
         with:
-          name: PDF
+          root_file: article.tex
+          compiler: xelatex
+
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: article-pdf
           path: article.pdf
+
+      - name: Create Release and attach PDF
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: article.pdf
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
