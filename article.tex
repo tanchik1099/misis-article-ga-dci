@@ -1,14 +1,11 @@
 % article.tex
 \documentclass{misisarticle}
 
-% Явное указание шрифтов для XeLaTeX (фикс для Linux)
+% Явное указание шрифтов с поддержкой кириллицы (Script=Cyrillic)
 \usepackage{fontspec}
-\setmainfont{TeX Gyre Termes}
-\setsansfont{TeX Gyre Heros}
-\setmonofont{TeX Gyre Cursor}
-\newfontfamily\cyrillicfont{TeX Gyre Termes}
-\newfontfamily\cyrillicfontsf{TeX Gyre Heros}
-\newfontfamily\cyrillicfonttt{TeX Gyre Cursor}
+\setmainfont{TeX Gyre Termes}[Script=Cyrillic]
+\setsansfont{TeX Gyre Heros}[Script=Cyrillic]
+\setmonofont{TeX Gyre Cursor}[Script=Cyrillic]
 
 \grnti{50.01.01}
 \asjc{1707, 2207}
